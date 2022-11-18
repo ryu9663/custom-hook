@@ -1,24 +1,14 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import useToast from "./hooks/useToast";
 
 function App() {
+  const { showToast } = useToast();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={() => showToast(false, "bye", 1000)}>토스트 빨강</button>
+      <button onClick={() => showToast(true, "hi", 3000)}>토스트 파랑</button>
+      <hr />
     </div>
   );
 }

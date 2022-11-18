@@ -11,3 +11,13 @@ const {width,height} = useWindowSize()
 ```
 const {loading,position} = useCurrentPosition()
 ```
+
+- useToast : 토스트 띄우기
+
+```
+const { showToast } = useToast();
+...
+//showToast(type: boolean, string: string, time: number)
+//type : 긍정 or 부정 , string : 내용, time : n초 이따 사라짐
+<button onClick={() => showToast(false, "bye", 1000)}>토스트 빨강</button>
+```
