@@ -21,3 +21,16 @@ const { showToast } = useToast();
 //type : 긍정 or 부정 , string : 내용, time : n초 이따 사라짐
 <button onClick={() => showToast(false, "bye", 1000)}>토스트 빨강</button>
 ```
+
+- useKakaoMap : 카카오맵api에 사용
+
+```
+
+const mapRef = useRef(null);
+
+const { map } = useMap(mapRef, otherMarkers,currentPosition);
+
+
+return <article ref={mapRef} className={styles.map} id={styles.map}></article>
+
+```
