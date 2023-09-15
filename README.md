@@ -34,3 +34,5 @@ const { map } = useMap(mapRef, otherMarkers,currentPosition);
 return <article ref={mapRef} className={styles.map} id={styles.map}></article>
 
 ```
+
+- useQuery : swagger에서 generate된 api call 메서드와 연동(이 레포지토리에 swagger관련된건 .gitignore에 있음)
