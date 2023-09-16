@@ -4,36 +4,24 @@ const QueryTest = () => {
   const { data } = useQuery(
     {
       name: "getInventory",
-      param: {},
     },
-    { suspense: true }
+    {
+      suspense: true,
+      select: (data) => {
+        return Object.entries(data);
+      },
+    }
   );
 
-  console.log(data);
-  return <div>Pets</div>;
+  return (
+    <>
+      {data?.map(([key, value]) => (
+        <div key={key}>
+          {key}:{value}
+        </div>
+      )) || "데이터가 없습니다."}
+    </>
+  );
 };
 
 export default QueryTest;
-
-// export const usePets = () => {
-//   return useQuery({
-//     queryKey: ["get-pets"],
-//     queryFn: async () => {
-//       let a;
-//       try {
-//         const res = await DefaultService["findPets"]();
-//         a = res.error || res.data;
-//         return a;
-//       } catch (err) {
-//         return a;
-//       }
-//       // const response = await api.pets.findPets();
-//       // if (response.error) return response.error;
-//       // return response.data;
-//     },
-//     onSuccess: (res) => {
-//       // res.error;
-//     },
-//     onError: () => {},
-//   });
-// };
