@@ -37,7 +37,7 @@ export const queryClient = new QueryClient({
     },
   },
   queryCache: new QueryCache({
-    onError: (error) => errorHandler({ error }),
+    // onError: (error) => errorHandler({ error }),
   }),
   mutationCache: new MutationCache({
     onError: (error, _variables, _context, mutation) =>
