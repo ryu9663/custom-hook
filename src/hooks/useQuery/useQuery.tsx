@@ -1,6 +1,5 @@
 import {
   UseQueryOptions,
-  UseQueryResult,
   useQuery as createQuery,
 } from "@tanstack/react-query";
 import { Service } from "../../generated/services/Service";
@@ -14,17 +13,27 @@ export type QueryResult<_QueryName extends QueryName> = Awaited<
   ReturnType<ServiceType[_QueryName]>
 >;
 
-const useQuery = <TQueryName extends QueryName, TQueryParam, TResponseType>(
+export type QueryParam<_QueryName extends QueryName> = Parameters<
+  ServiceType[_QueryName]
+>[0];
+
+const useQuery = <TQueryName extends QueryName, TQueryParam, TData>(
   query: {
     name: TQueryName;
     param?: TQueryParam;
   },
 
-  options?: Omit<UseQueryOptions<TResponseType>, "queryKey" | "queryFn">
-): UseQueryResult => {
+  options?: Omit<
+    UseQueryOptions<QueryResult<TQueryName>, Error, TData>,
+    "queryKey" | "queryFn"
+  >
+) => {
   const customOption = {
     ...options,
-  } as Omit<UseQueryOptions<TResponseType>, "queryKey" | "queryFn">;
+  } as Omit<
+    UseQueryOptions<QueryResult<TQueryName>, Error, TData>,
+    "queryKey" | "queryFn"
+  >;
 
   const queryFn = Service[query.name] as (params?: unknown) => Promise<any>;
 
