@@ -43,12 +43,12 @@ export const useQuery = <
 
   options?: Omit<
     UseQueryOptions<QueryResult<TQueryName>, Error, TData>,
-    "queryKey"
+    "queryKey" | "queryFn"
   >
-) => {
-  const customOption = {
+): OriginalUseQueryResult<TData, Error> => {
+  const customOption: typeof options = {
     ...options,
-  } as Omit<UseQueryOptions<unknown, Error, TData>, "queryKey">;
+  };
 
   const queryFn = Service[query.name] as (params?: unknown) => Promise<any>;
 
@@ -56,5 +56,5 @@ export const useQuery = <
     Object.values(query),
     ({ queryKey: [, param] }) => queryFn(param),
     customOption
-  ) as OriginalUseQueryResult<TData, Error>;
+  );
 };
